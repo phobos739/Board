@@ -1,29 +1,32 @@
-<?php
-
- 
+<?php 
 
 if (isset($_POST["submit"])) {
 
     $Name = $_POST["name"];
 
     $Message = $_POST["message"];
-
-    $tmpname = $_FILES["image"]["tmp_name"];
-
-    $picture = addslashes(fread(fopen($tmpname,"rb"), filesize($tmpname)));
     
-    $link = mysqli_connect("localhost", "root", "", "board");
+    if (file_exists("./upload/" . $_FILES["image"]["name"])) {
+        echo $_FILES["image"]["name"] . " already exists. ";
+    } else {
+        move_uploaded_file(
+            $_FILES["image"]["tmp_name"],
+            "./upload/" . $_FILES["image"]["name"]
+        );        
+    }
+
+    $Picture = "./upload/" . $_FILES["image"]["name"];
+
+    $link = mysqli_connect("localhost", "root", "root", "board");
 
     mysqli_query($link, "set names utf-8");    
     
-    $sql = "INSERT INTO `list` (`Name`, `Message`, `Picture`) VALUES ('$Name', '$Message', '$picture')";
+    $sql = "INSERT INTO `list` (`Name`, `Message`, `Picture`) VALUES ('$Name', '$Message', '$Picture')";
     
     mysqli_query($link, $sql);    
 }
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
