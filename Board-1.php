@@ -7,12 +7,19 @@ if (isset($_POST["submit"])) {
     $Message = $_POST["message"];
     
     if (file_exists("./upload/" . $_FILES["image"]["name"])) {
+
         echo $_FILES["image"]["name"] . " already exists. ";
+
     } else {
+
         move_uploaded_file(
+
             $_FILES["image"]["tmp_name"],
+
             "./upload/" . $_FILES["image"]["name"]
+
         );        
+
     }
 
     $Picture = "./upload/" . $_FILES["image"]["name"];
@@ -24,6 +31,7 @@ if (isset($_POST["submit"])) {
     $sql = "INSERT INTO `list` (`Name`, `Message`, `Picture`) VALUES ('$Name', '$Message', '$Picture')";
     
     mysqli_query($link, $sql);    
+
 }
 
 ?>
@@ -33,7 +41,7 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Board</title>
+    <title>Board-1</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>

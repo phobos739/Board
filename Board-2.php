@@ -16,22 +16,31 @@ $result = mysqli_query($link, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Board-2</title>
 </head>
 <body>
 
-<?php
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "Time：{$row['Time']}<br>";
-    echo "Name：{$row['Name']}<br>";
-    echo "Message：{$row['Message']}<br>";
-?>
+<table border="1">
+<tbody>
+<tr>
+<td>Picture</td>
+<td>Name</td>
+<td>Message</td>
+<td>Time</td>
+</tr>
 
-<img src="<?= $row['Picture'] ?>" width="100" />
 
-<br><HR>
-    
+<?php while ($row = mysqli_fetch_assoc($result)) { ?>
+<tr>
+<td><img src="<?= $row['Picture'] ?>" width="100" /></td>
+<td><?= $row["Name"]; ?></td>
+<td><?= $row["Message"]; ?></td>
+<td><?= $row["Time"]; ?></td>
+</tr>
 <?php } ?>
 
+
+</tbody>
+</table>
 </body>
 </html>
